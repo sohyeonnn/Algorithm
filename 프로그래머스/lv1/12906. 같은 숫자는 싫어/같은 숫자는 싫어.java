@@ -20,6 +20,7 @@ public class Solution {
             }
             
         }
+        //answer 리스트 크기 선언후 Integer ArrayList을 int 배열로 변환
         answer = new int[arrList.size()];
         for (int i = 0 ; i < arrList.size() ; i++) {
             answer[i] = arrList.get(i).intValue();
