@@ -4,4 +4,5 @@ WHERE NAME = 'Milk'AND
     CART_ID IN (SELECT CART_ID
                 FROM CART_PRODUCTS
                 WHERE NAME = 'Yogurt')
+-- GROUP BY CART_ID         -- GROUP BY 해줘야 중복제거됨
 ORDER BY CART_ID
