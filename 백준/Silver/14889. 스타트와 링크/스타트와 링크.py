@@ -1,29 +1,38 @@
-import sys
-input = sys.stdin.readline
-N = int(input())
-board = [list(map(int,input().split())) for _ in range(N)]
-visited = [False for _ in range(N)]
-INF = 2147000000
-res = INF
+n = int(input())
+synergy = [list(map(int, input().split())) for _ in range(n)]
+visited = [False] * n
+min_diff = 1e9  # 최소 시너지 차이를 저장하는 변수
 
-def backtracking(L,idx):
-    global res
-    if L == N//2:
-        A = 0
-        B = 0
-        for i in range(N):
-            for j in range(N):
-                if visited[i] and visited[j]:
-                    A += board[i][j]
-                elif not visited[i] and not visited[j]:
-                    B +=board[i][j]
-        res = min(res, abs(A-B))
+def dfs(depth, start):
+    global min_diff
+    
+    if depth == n // 2:  # 팀을 다 나누었을 경우
+        start_team = []
+        link_team = []
+        for i in range(n):
+            if visited[i]:
+                start_team.append(i)
+            else:
+                link_team.append(i)
+        
+        # 팀 시너지 계산
+        start_synergy = 0
+        link_synergy = 0
+        for i in range(n // 2):
+            for j in range(i+1, n // 2):
+                start_synergy += synergy[start_team[i]][start_team[j]] + synergy[start_team[j]][start_team[i]]
+                link_synergy += synergy[link_team[i]][link_team[j]] + synergy[link_team[j]][link_team[i]]
+        
+        # 최소 시너지 차이 갱신
+        min_diff = min(min_diff, abs(start_synergy - link_synergy))
         return
-    for i in range(idx,N):
+    
+    # 팀 나누기
+    for i in range(start, n):
         if not visited[i]:
             visited[i] = True
-            backtracking(L+1,i+1)
+            dfs(depth+1, i+1)
             visited[i] = False
-            
-backtracking(0,0)
-print(res)
+
+dfs(0, 0)
+print(min_diff)
