@@ -1,6 +1,6 @@
 from collections import deque
 
-def solution(n, m , section):
+def solution(n, m, section):
     answer = 0					
     section = deque(section)	
     
