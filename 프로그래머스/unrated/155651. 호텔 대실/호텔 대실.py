@@ -7,7 +7,6 @@ else:
 1. book_time을 분단위로 바꿔준다.
 '''
 import heapq
-
 def solution(book_time):
     
     book_time_minute = []
