@@ -1,11 +1,12 @@
-def solution(players, callings):    
-    player_dict = {player:rank for rank, player in enumerate(players)}
-    rank_dict = {rank:player for rank, player in enumerate(players)}
+def solution(players, callings):
+    player_dict = {player: idx for idx, player in enumerate(players)}
     
     for call in callings:
-        rank = player_dict[call]
+        idx = player_dict[call]
         
-        player_dict[rank_dict[rank-1]], player_dict[rank_dict[rank]] = player_dict[rank_dict[rank]], player_dict[rank_dict[rank-1]]
-        rank_dict[rank-1], rank_dict[rank] = rank_dict[rank], rank_dict[rank-1]
+        players[idx], players[idx-1] = players[idx-1], players[idx]
+        
+        player_dict[players[idx]] = idx
+        player_dict[players[idx-1]] = idx-1
     
-    return list(rank_dict.values())
+    return players
