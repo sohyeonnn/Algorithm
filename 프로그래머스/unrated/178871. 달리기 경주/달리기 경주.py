@@ -1,5 +1,5 @@
 def solution(players, callings):
-    player_dict = {player: idx for idx, player in enumerate(players)}
+    player_dict = {player : idx for idx, player in enumerate(players)}
     
     for call in callings:
         idx = player_dict[call]
